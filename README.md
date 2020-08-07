@@ -1,6 +1,12 @@
+# **IN BUILDING**
+
 # mobile
 
-A new Flutter application.
+The mobile version of **Next Level Week** #2 project @Rocketseat.
+
+## Technologies
+
+- Flutter
 
 ## Getting Started
 
