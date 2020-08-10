@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/colors/colors.dart';
 import 'package:mobile/fonts/fontStyles.dart';
 
@@ -47,8 +48,14 @@ class TeacherItem extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name, style: CustomFontStyles.teacherName,),
-                  Text(subject, style: CustomFontStyles.teacherSubject,),
+                  Text(
+                    name,
+                    style: CustomFontStyles.teacherName,
+                  ),
+                  Text(
+                    subject,
+                    style: CustomFontStyles.teacherSubject,
+                  ),
                 ],
               ),
             ],
@@ -56,38 +63,61 @@ class TeacherItem extends StatelessWidget {
           SizedBox(
             height: 24.0,
           ),
-          Text(bio, style: CustomFontStyles.teacherBio,),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              bio,
+              style: CustomFontStyles.teacherBio,
+            ),
+          ),
           SizedBox(
             height: 20.0,
           ),
           Divider(),
-          SizedBox(height: 10.0,),
-          Text("Preço p/hora $cost", style: CustomFontStyles.teacherCostValue,),
-          SizedBox(height: 20.0,),
+          SizedBox(
+            height: 10.0,
+          ),
+          Text(
+            "Preço p/hora $cost",
+            style: CustomFontStyles.teacherCostValue,
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 56.0,
-                height: 56.0,
-                child: FlatButton(
-                  onPressed: () {},
-                  color: AppColors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  child: Image.asset('assets/heart-outline.png'),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  height: 56.0,
+                  child: FlatButton(
+                    onPressed: () {},
+                    color: AppColors.red,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: SvgPicture.asset('assets/favorite-teacher.svg'),
+                  ),
                 ),
               ),
-              Container(
-                height: 56.0,
-                child: FlatButton.icon(
-                  padding: EdgeInsets.symmetric(horizontal: 45.0),
-                  label: Text("Entrar em Contato", style: CustomFontStyles.teacherContactButton,),
-                  onPressed: () {},
-                  color: AppColors.green,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0)),
-                  icon: Image.asset('assets/whatsapp.png'),
+              SizedBox(
+                width: 10.0,
+              ),
+              Expanded(
+                flex: 4,
+                child: Container(
+                  height: 56.0,
+                  child: FlatButton.icon(
+                    label: Text(
+                      "Entrar em Contato",
+                      style: CustomFontStyles.teacherContactButton,
+                    ),
+                    onPressed: () {},
+                    color: AppColors.green,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)),
+                    icon: SvgPicture.asset('assets/whatsapp.svg'),
+                  ),
                 ),
               ),
             ],

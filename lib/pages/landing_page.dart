@@ -53,21 +53,28 @@ class LandingPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          LandingButton(
-                            icon: 'assets/study-icon.png',
-                            color: AppColors.lighterPurple,
-                            title: "Estudar",
-                              buttonFunction: () {
-                                buttonFunction(context, TeacherList());
-                              }
+                          Expanded(
+                            flex: 1,
+                            child: LandingButton(
+                              icon: 'assets/study-icon.svg',
+                              color: AppColors.lighterPurple,
+                              title: "Estudar",
+                                buttonFunction: () {
+                                  buttonFunction(context, TeacherList());
+                                }
+                            ),
                           ),
-                          LandingButton(
-                            icon: 'assets/give-classes-icon.png',
-                            color: AppColors.green,
-                            title: "Dar Aulas",
-                            buttonFunction: () {
-                              buttonFunction(context, TeacherScreen());
-                            }
+                          SizedBox(width: 16.0,),
+                          Expanded(
+                            flex: 1,
+                            child: LandingButton(
+                              icon: 'assets/give-classes-icon.svg',
+                              color: AppColors.green,
+                              title: "Dar Aulas",
+                              buttonFunction: () {
+                                buttonFunction(context, TeacherScreen());
+                              }
+                            ),
                           ),
                         ],
                       ),

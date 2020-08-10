@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/colors/colors.dart';
 import 'package:mobile/components/filter_container.dart';
 import 'package:mobile/components/teacher_item.dart';
@@ -128,11 +129,11 @@ class _TeacherListState extends State<TeacherList> {
             tabs: [
               Tab(
                 text: "Proffys",
-                icon: Image.asset('assets/proffys-tabbar.png'),
+                icon: SvgPicture.asset('assets/proffys-bar.svg'),
               ),
               Tab(
                 text: "Favoritos",
-                icon: Image.asset('assets/heart-tabbar.png'),
+                icon: SvgPicture.asset('assets/favorites-bar.svg'),
               ),
             ],
           ),

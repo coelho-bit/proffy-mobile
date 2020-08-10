@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/colors/colors.dart';
 import 'package:mobile/fonts/fontStyles.dart';
 import 'package:mobile/pages/landing_page.dart';
@@ -14,7 +15,7 @@ class _OnboardingState extends State<Onboarding> {
     "Encontre vários\nprofessores para\nensinar você",
     "Ou dê aulas\nsobre o que você\nmais conhece",
   ];
-  List<String> images = ['assets/study.png', 'assets/give-classes.png'];
+  List<String> images = ['assets/study-background.svg', 'assets/give-classes-background.svg'];
   Color themeColor = AppColors.purple;
 
   void next(BuildContext context) {
@@ -40,7 +41,7 @@ class _OnboardingState extends State<Onboarding> {
                 color: themeColor,
                 width: double.infinity,
               ),
-              Center(child: Image.asset(images[currentStep])),
+              Center(child: SvgPicture.asset(images[currentStep])),
             ],
           ),
         ),

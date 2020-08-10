@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile/fonts/fontStyles.dart';
 
 class LandingButton extends StatelessWidget {
@@ -13,7 +14,6 @@ class LandingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 160.0,
       child: FlatButton(
         onPressed: buttonFunction,
         shape: RoundedRectangleBorder(
@@ -24,7 +24,7 @@ class LandingButton extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(icon),
+            SvgPicture.asset(icon),
             SizedBox(height: 50.0,),
             Text(title, style: CustomFontStyles.landingButtonText,)
           ],

@@ -42,7 +42,7 @@ na nossa plataforma web.''',
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    padding: EdgeInsets.symmetric(horizontal: 110.0, vertical: 15.0),
+                    padding: EdgeInsets.symmetric(vertical: 15.0),
                     color: AppColors.green,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
