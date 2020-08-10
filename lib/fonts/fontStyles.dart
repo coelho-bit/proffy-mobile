@@ -115,4 +115,16 @@ class CustomFontStyles {
       fontWeight: FontWeight.w600,
       fontSize: 12.0,);
 
+  static const TextStyle filterHint = TextStyle(
+    fontFamily: "Poppins",
+    fontWeight: FontWeight.w400,
+    color: Color(0xffC1BCCC),
+    fontSize: 14.0,);
+
+  static const TextStyle filterItemLabel = TextStyle(
+    fontFamily: "Poppins",
+    fontWeight: FontWeight.w400,
+    color: Color(0xffD4C2FF),
+    fontSize: 12.0,);
+
 }
