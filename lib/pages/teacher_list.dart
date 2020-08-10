@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/colors/colors.dart';
+import 'package:mobile/components/filter_container.dart';
 import 'package:mobile/components/teacher_item.dart';
 import 'package:mobile/fonts/fontStyles.dart';
 
-class TeacherList extends StatelessWidget {
+import '../class_model.dart';
+
+class TeacherList extends StatefulWidget {
+  @override
+  _TeacherListState createState() => _TeacherListState();
+}
+
+class _TeacherListState extends State<TeacherList> {
+  bool isFilterVisible = true;
+  List<TeacherClass> teacherList = [];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: AppColors.background,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: AppColors.purple,
@@ -17,7 +29,7 @@ class TeacherList extends StatelessWidget {
         body: Stack(
           children: [
             Container(
-              height: 210.0,
+              height: isFilterVisible ? 350.0 : 200.0,
               width: double.infinity,
               color: AppColors.purple,
               child: Padding(
@@ -26,18 +38,20 @@ class TeacherList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: 20.0,
+                      height: 10.0,
                     ),
                     Text(
                       "Proffys\ndisponíveis",
                       style: CustomFontStyles.teacherListTitle,
                     ),
                     SizedBox(
-                      height: 32.0,
+                      height: 24.0,
                     ),
                     GestureDetector(
                       onTap: () {
-                        // TODO: implements search
+                        setState(() {
+                          isFilterVisible = !isFilterVisible;
+                        });
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,7 +65,9 @@ class TeacherList extends StatelessWidget {
                             style: CustomFontStyles.filterLabel,
                           ),
                           Icon(
-                            Icons.keyboard_arrow_down,
+                            !isFilterVisible
+                                ? Icons.keyboard_arrow_down
+                                : Icons.keyboard_arrow_up,
                             color: Color(0xffD4C2FF),
                           )
                         ],
@@ -59,50 +75,67 @@ class TeacherList extends StatelessWidget {
                     ),
                     Divider(
                       color: Color(0xff9871F5),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 170.0),
-              child: Container(
-                color: AppColors.background,
-                child: ListView(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          right: 16.0, left: 16.0, bottom: 10.0, top: 10.0),
-                      child: TeacherItem(
-                        name: "Estevao Coelho",
-                        subject: "Matemática",
-                        bio:
-                            "Entusiasta das melhores tecnologias de química avançada.Apaixonado por explodir coisas em laboratório e por mudar a vida das pessoas através de experiências. Mais de 200.000 pessoas já passaram por uma das minhas explosões.",
-                        cost: "R\$ 80.00",
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Visibility(
+                      visible: isFilterVisible,
+                      child: FilterContainer(
+                        onFilterResult: (List<TeacherClass> list) {
+                          teacherList = list;
+                          setState(() {});
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(top: isFilterVisible ? 300.0 : 150.0),
+              child: Container(
+                child: ListView.builder(
+                  itemCount: teacherList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                        padding: const EdgeInsets.only(
+                            right: 16.0, left: 16.0, bottom: 10.0, top: 10.0),
+                        child: teacherList.isNotEmpty
+                            ? TeacherItem(
+                                name: teacherList[index].name,
+                                subject: teacherList[index].subject,
+                                bio: teacherList[index].bio,
+                                cost: "R\$ ${teacherList[index].cost}",
+                                imageUrl: teacherList[index].avatar,
+                                whatsapp: teacherList[index].whatsapp,
+                              )
+                            : null);
+                  },
+                ),
+              ),
+            ),
           ],
         ),
-        bottomNavigationBar: TabBar(
-          indicatorColor: AppColors.purple,
-          indicatorWeight: 4.0,
-          unselectedLabelStyle: CustomFontStyles.unSelectedTabBarText,
-          labelColor: AppColors.purple,
-          unselectedLabelColor: Color(0xffC1BCCC),
-          tabs: [
-            Tab(
-              text: "Proffys",
-              icon: Image.asset('assets/proffys-tabbar.png'),
-            ),
-            Tab(
-              text: "Favoritos",
-              icon: Image.asset('assets/heart-tabbar.png'),
-            ),
-          ],
+        bottomNavigationBar: Material(
+          color: Colors.white,
+          child: TabBar(
+            indicatorColor: AppColors.purple,
+            indicatorWeight: 4.0,
+            unselectedLabelStyle: CustomFontStyles.unSelectedTabBarText,
+            labelColor: AppColors.purple,
+            unselectedLabelColor: Color(0xffC1BCCC),
+            tabs: [
+              Tab(
+                text: "Proffys",
+                icon: Image.asset('assets/proffys-tabbar.png'),
+              ),
+              Tab(
+                text: "Favoritos",
+                icon: Image.asset('assets/heart-tabbar.png'),
+              ),
+            ],
+          ),
         ),
       ),
     );
