@@ -18,9 +18,10 @@ class FilterContainer extends StatefulWidget {
 
 class _FilterContainerState extends State<FilterContainer> {
   TimeOfDay time;
+  final FilterController filterController = FilterController();
 
   void isFilterCompleted(int day, String subject, String time) {
-    if (day != null && subject.isNotEmpty && time.isNotEmpty) {
+    if (day != null && subject != null && time != null) {
       ApiServices.getFilteredProffys(day, subject, time).then((value) =>
           widget.onFilterResult.call(value));
     }
@@ -35,8 +36,6 @@ class _FilterContainerState extends State<FilterContainer> {
 
   @override
   Widget build(BuildContext context) {
-    final FilterSingleton filterController = FilterSingleton();
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -90,7 +89,7 @@ class _FilterContainerState extends State<FilterContainer> {
                       onPressed: () async {
                         time = await getTime(context);
                         setState(() {});
-                        filterController.time = time.format(context);
+                        filterController.time = "${time.hour}:${time.minute}";
                         isFilterCompleted(filterController.day,
                             filterController.subject, filterController.time);
                       },
