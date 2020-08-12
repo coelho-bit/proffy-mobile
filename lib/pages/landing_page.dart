@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:mobile/colors/colors.dart';
 import 'package:mobile/components/landing_button.dart';
 import 'package:mobile/fonts/fontStyles.dart';
-import 'package:mobile/pages/teacher_list.dart';
+import 'package:mobile/pages/home.dart';
 import 'package:mobile/pages/teacher_page.dart';
 
 class LandingPage extends StatelessWidget {
@@ -60,7 +60,7 @@ class LandingPage extends StatelessWidget {
                               color: AppColors.lighterPurple,
                               title: "Estudar",
                                 buttonFunction: () {
-                                  buttonFunction(context, TeacherList());
+                                  buttonFunction(context, Home());
                                 }
                             ),
                           ),

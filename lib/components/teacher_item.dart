@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile/class_model.dart';
 import 'package:mobile/colors/colors.dart';
 import 'package:mobile/fonts/fontStyles.dart';
 
-class TeacherItem extends StatelessWidget {
-  final String imageUrl;
-  final String name;
-  final String subject;
-  final String bio;
-  final String cost;
-  final String whatsapp;
+class TeacherItem extends StatefulWidget {
 
-  TeacherItem(
-      {this.name,
-      this.bio,
-      this.cost,
-      this.imageUrl,
-      this.subject,
-      this.whatsapp});
+  final TeacherClass teacherClass;
+  final Function function;
+  bool isFavorite;
 
+  TeacherItem({ this.teacherClass, this.function, this.isFavorite });
+
+  @override
+  _TeacherItemState createState() => _TeacherItemState();
+}
+
+class _TeacherItemState extends State<TeacherItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +37,8 @@ class TeacherItem extends StatelessWidget {
                 height: 64.0,
                 child: CircleAvatar(
                   backgroundImage: NetworkImage(
-                      "https://avatars0.githubusercontent.com/u/14273790?s=460&u=25773aaf7628a02d02e9b8fdbc9e0e58e4d2ebcf&v=4"),
+                    widget.teacherClass.avatar
+                  ),
                 ),
               ),
               SizedBox(
@@ -49,11 +48,11 @@ class TeacherItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    widget.teacherClass.name,
                     style: CustomFontStyles.teacherName,
                   ),
                   Text(
-                    subject,
+                    widget.teacherClass.subject,
                     style: CustomFontStyles.teacherSubject,
                   ),
                 ],
@@ -66,7 +65,7 @@ class TeacherItem extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              bio,
+              widget.teacherClass.bio,
               style: CustomFontStyles.teacherBio,
             ),
           ),
@@ -78,7 +77,7 @@ class TeacherItem extends StatelessWidget {
             height: 10.0,
           ),
           Text(
-            "Preço p/hora $cost",
+            "Preço p/hora ${widget.teacherClass.cost}",
             style: CustomFontStyles.teacherCostValue,
           ),
           SizedBox(
@@ -92,11 +91,16 @@ class TeacherItem extends StatelessWidget {
                 child: Container(
                   height: 56.0,
                   child: FlatButton(
-                    onPressed: () {},
-                    color: AppColors.red,
+                    onPressed: () {
+                      widget.function();
+                      this.widget.isFavorite = !this.widget.isFavorite;
+                      setState(() {
+                      });
+                    },
+                    color: widget.isFavorite ? AppColors.red : AppColors.purple,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0)),
-                    child: SvgPicture.asset('assets/favorite-teacher.svg'),
+                    child: SvgPicture.asset(widget.isFavorite ? 'assets/unfavorite-teacher.svg' : 'assets/favorite-teacher.svg'),
                   ),
                 ),
               ),
@@ -112,7 +116,9 @@ class TeacherItem extends StatelessWidget {
                       "Entrar em Contato",
                       style: CustomFontStyles.teacherContactButton,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      print(widget.teacherClass.whatsapp);
+                    },
                     color: AppColors.green,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0)),
