@@ -17,7 +17,7 @@ class _FavoriteListState extends State<FavoriteList>  {
     return Stack(
       children: [
         Container(
-          height: 200.0,
+          height: 180.0,
           width: double.infinity,
           color: AppColors.purple,
           child: Padding(

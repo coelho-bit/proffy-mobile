@@ -31,7 +31,7 @@ class _TeachersListState extends State<TeachersList> {
     return Stack(
       children: [
         Container(
-          height: isFilterVisible ? 350.0 : 200.0,
+          height: isFilterVisible ? 350.0 : 180.0,
           width: double.infinity,
           color: AppColors.purple,
           child: Padding(
@@ -47,7 +47,7 @@ class _TeachersListState extends State<TeachersList> {
                   style: CustomFontStyles.teacherListTitle,
                 ),
                 SizedBox(
-                  height: 24.0,
+                  height: 30.0,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -79,7 +79,7 @@ class _TeachersListState extends State<TeachersList> {
                   color: Color(0xff9871F5),
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 20.0,
                 ),
                 Visibility(
                   visible: isFilterVisible,
@@ -95,21 +95,11 @@ class _TeachersListState extends State<TeachersList> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: isFilterVisible ? 300.0 : 150.0),
+          padding: EdgeInsets.only(top: isFilterVisible ? 350.0 : 180.0),
           child: Container(
             child: ListView.builder(
               itemCount: teacherList.length,
               itemBuilder: (BuildContext context, int index) {
-//                DatabaseService.db.verifyFavoriteList(teacherList[index].userId).then((value){
-//                  if(value) {
-//                    isFavorite = true;
-//                  }
-//                  else {
-//                    isFavorite = false;
-//                  }
-//                  setState(() {
-//                  });
-//                });
                 return Padding(
                   padding: const EdgeInsets.only(
                       right: 16.0, left: 16.0, bottom: 10.0, top: 10.0),
